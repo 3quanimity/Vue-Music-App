@@ -22,9 +22,10 @@
 
   <!-- Introduction -->
   <section class="mb-8 py-20 text-white text-center relative">
+    <!-- TODO: removed the class introduction-bg to make the image show up, but eventually need to bring back the animation -->
     <div
-      class="absolute inset-0 w-full h-full bg-contain introduction-bg"
-      style="background-image: url(/assets/img/header.png)"
+      class="absolute inset-0 w-full h-full bg-contain"
+      :style="{ backgroundImage: 'url(/assets/img/header.png)' }"
     ></div>
     <div class="container mx-auto">
       <div class="text-white main-header-content">
