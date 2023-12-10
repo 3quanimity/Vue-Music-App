@@ -7,11 +7,15 @@ export default {
 
   computed: {
     ...mapStores(useModalStore)
+    // ...mapState(useModalStore, ['isOpen']),
+    // ...mapWritableState(useModalStore, ['isOpen'])
   },
 
   methods: {
     toggleAuthModal() {
       this.modalStore.isOpen = !this.modalStore.isOpen
+      // When using mapState or mapWritableState:
+      // this.isOpen = !this.isOpen
     }
   }
 }
