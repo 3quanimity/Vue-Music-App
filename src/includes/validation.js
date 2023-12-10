@@ -2,6 +2,7 @@ import {
   alpha_spaces as alhaSpaces,
   confirmed,
   email,
+  not_one_of as excluded,
   max,
   max_value as maxVal,
   min,
@@ -24,5 +25,6 @@ export default {
     defineRule('min_value', minVal)
     defineRule('max_value', maxVal)
     defineRule('confirmed', confirmed)
+    defineRule('excluded', excluded)
   }
 }
