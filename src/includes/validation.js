@@ -1,4 +1,12 @@
-import { alpha_spaces as alhaSpaces, max, min, required } from '@vee-validate/rules'
+import {
+  alpha_spaces as alhaSpaces,
+  email,
+  max,
+  max_value as maxVal,
+  min,
+  min_value as minVal,
+  required
+} from '@vee-validate/rules'
 import { ErrorMessage, Field as VeeField, Form as VeeForm, defineRule } from 'vee-validate'
 
 export default {
@@ -11,5 +19,8 @@ export default {
     defineRule('min', min)
     defineRule('max', max)
     defineRule('alpha_spaces', alhaSpaces)
+    defineRule('email', email)
+    defineRule('min_value', minVal)
+    defineRule('max_value', maxVal)
   }
 }
