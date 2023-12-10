@@ -19,5 +19,13 @@ module.exports = {
   },
   env: {
     node: true
+  },
+  rules: {
+    'vue/component-tags-order': [
+      'error',
+      {
+        order: ['script', 'template']
+      }
+    ]
   }
 }
