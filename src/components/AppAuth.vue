@@ -31,6 +31,10 @@ export default {
   methods: {
     closeModal() {
       this.modalVisibility = false
+    },
+
+    register(values) {
+      console.log('🚀 ~ values:', values)
     }
   }
 }
@@ -119,7 +123,11 @@ export default {
           </form>
 
           <!-- Registration Form -->
-          <vee-form v-show="tab === 'register'" :validation-schema="validationSchema">
+          <vee-form
+            v-show="tab === 'register'"
+            :validation-schema="validationSchema"
+            @submit="register"
+          >
             <!-- Name -->
             <div class="mb-3">
               <label class="inline-block mb-2">Name</label>
@@ -150,8 +158,8 @@ export default {
                 name="age"
                 class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
               />
+              <ErrorMessage name="age" class="text-red-600" />
             </div>
-            <ErrorMessage name="age" class="text-red-600" />
             <!-- Password -->
             <div class="mb-3">
               <label class="inline-block mb-2">Password</label>
@@ -198,9 +206,7 @@ export default {
                 class="w-4 h-4 float-left -ml-6 mt-1 rounded"
               />
               <label class="inline-block">Accept terms of service</label>
-              <div>
-                <ErrorMessage name="tos" class="text-red-600" />
-              </div>
+              <ErrorMessage name="tos" class="text-red-600 block" />
             </div>
             <button
               type="submit"
