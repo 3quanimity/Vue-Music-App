@@ -13,7 +13,7 @@ export default {
 
   methods: {
     toggleAuthModal() {
-      this.modalStore.isOpen = !this.modalStore.isOpen
+      this.modalStore.isOpen = true
       // When using mapState or mapWritableState:
       // this.isOpen = !this.isOpen
     }
