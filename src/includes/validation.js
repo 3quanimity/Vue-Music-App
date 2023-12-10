@@ -1,5 +1,6 @@
 import {
   alpha_spaces as alhaSpaces,
+  confirmed,
   email,
   max,
   max_value as maxVal,
@@ -22,5 +23,6 @@ export default {
     defineRule('email', email)
     defineRule('min_value', minVal)
     defineRule('max_value', maxVal)
+    defineRule('confirmed', confirmed)
   }
 }

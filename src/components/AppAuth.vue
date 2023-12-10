@@ -13,8 +13,8 @@ export default {
         name: 'required|min:3|max:100|alpha_spaces',
         email: 'required|min:3|max:100|email',
         age: 'required|min_value:18|max_value:130',
-        password: '',
-        confirmPassword: '',
+        password: 'required|min:3|max:100',
+        confirmPassword: 'required|confirmed:@password',
         country: '',
         tos: ''
       }
@@ -155,20 +155,24 @@ export default {
             <!-- Password -->
             <div class="mb-3">
               <label class="inline-block mb-2">Password</label>
-              <input
+              <vee-field
                 type="password"
+                name="password"
                 class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
                 placeholder="Password"
               />
+              <ErrorMessage name="password" class="text-red-600" />
             </div>
             <!-- Confirm Password -->
             <div class="mb-3">
               <label class="inline-block mb-2">Confirm Password</label>
-              <input
+              <vee-field
                 type="password"
+                name="confirmPassword"
                 class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
                 placeholder="Confirm Password"
               />
+              <ErrorMessage name="confirmPassword" class="text-red-600" />
             </div>
             <!-- Country -->
             <div class="mb-3">
