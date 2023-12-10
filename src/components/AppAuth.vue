@@ -10,7 +10,7 @@ export default {
       tab: 'login',
 
       validationSchema: {
-        name: 'required',
+        name: 'required|min:3|max:100|alpha_spaces',
         email: '',
         age: '',
         password: '',
