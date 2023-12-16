@@ -21,6 +21,22 @@ export default {
 
       userData: {
         country: 'USA'
+      },
+
+      registration_in_submission: false,
+      registration_show_alert: false,
+      registration_alert_message: undefined,
+      registration_alert_type: undefined,
+
+      alertMessages: {
+        pending: 'Please wait, Your account is being created 🥳',
+        success: 'Your account has been created successfully 🎉',
+        error: 'Something went wrong, please try again 😢'
+      },
+      alertTypes: {
+        pending: 'bg-blue-500',
+        success: 'bg-green-500',
+        error: 'bg-red-500'
       }
     }
   },
@@ -38,6 +54,15 @@ export default {
     },
 
     register(values) {
+      this.registration_in_submission = true
+      this.registration_alert_type = this.alertTypes.pending
+      this.registration_alert_message = this.alertMessages.pending
+      this.registration_show_alert = true
+
+      setTimeout(() => {
+        this.registration_alert_type = this.alertTypes.success
+        this.registration_alert_message = this.alertMessages.success
+      }, 3000)
       console.log('🚀 ~ values:', values)
     }
   }
@@ -138,6 +163,13 @@ export default {
           </form>
 
           <!-- Registration Form -->
+          <div
+            class="text-white text-center font-bold p-4 rounded mb-4"
+            :class="registration_alert_type"
+            v-if="registration_show_alert"
+          >
+            {{ registration_alert_message }}
+          </div>
           <vee-form
             v-show="tab === 'register'"
             :validation-schema="validationSchema"
@@ -237,6 +269,7 @@ export default {
             <button
               type="submit"
               class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700"
+              :disabled="registration_in_submission"
             >
               Submit
             </button>
