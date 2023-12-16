@@ -10,7 +10,10 @@ module.exports = {
   ],
   overrides: [
     {
-      files: ['cypress/e2e/**/*.{cy,spec}.{js,ts,jsx,tsx}', 'cypress/support/**/*.{js,ts,jsx,tsx}'],
+      files: [
+        'cypress/e2e/**/*.{cy,spec}.{js,ts,jsx,tsx}',
+        'cypress/support/**/*.{js,ts,jsx,tsx}'
+      ],
       extends: ['plugin:cypress/recommended']
     }
   ],
@@ -20,6 +23,7 @@ module.exports = {
   env: {
     node: true
   },
+  plugins: ['prettier'],
   rules: {
     'vue/component-tags-order': [
       'error',

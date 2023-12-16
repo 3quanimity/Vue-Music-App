@@ -13,10 +13,14 @@ export default {
         name: 'required|min:3|max:100|alpha_spaces',
         email: 'required|min:3|max:100|email',
         age: 'required|min_value:18|max_value:130',
-        password: 'required|min:3|max:100',
-        confirmPassword: 'required|confirmed:@password',
-        country: 'required|excluded:Banned',
-        tos: 'required'
+        password: 'required|min:8|max:100|excluded:password',
+        confirmPassword: 'required|password_mismatch:@password',
+        country: 'required|country_excluded:Banned',
+        tos: 'tos'
+      },
+
+      userData: {
+        country: 'USA'
       }
     }
   },
@@ -41,7 +45,11 @@ export default {
 </script>
 
 <template>
-  <div class="fixed z-10 inset-0 overflow-y-auto" :class="hiddenClass" id="modal">
+  <div
+    class="fixed z-10 inset-0 overflow-y-auto"
+    :class="hiddenClass"
+    id="modal"
+  >
     <div
       class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
     >
@@ -50,7 +58,9 @@ export default {
       </div>
 
       <!-- This element is to trick the browser into centering the modal contents. -->
-      <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen">
+        &#8203;
+      </span>
 
       <div
         class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
@@ -61,7 +71,10 @@ export default {
           <div class="flex justify-between items-center pb-4">
             <p class="text-2xl font-bold">Your Account</p>
             <!-- Modal Close Button -->
-            <div class="modal-close cursor-pointer z-50" @click.prevent="closeModal">
+            <div
+              class="modal-close cursor-pointer z-50"
+              @click.prevent="closeModal"
+            >
               <i class="fas fa-times"></i>
             </div>
           </div>
@@ -77,8 +90,9 @@ export default {
                 }"
                 href="#"
                 @click.prevent="tab = 'login'"
-                >Login</a
               >
+                Login
+              </a>
             </li>
             <li class="flex-auto text-center">
               <a
@@ -89,8 +103,9 @@ export default {
                 }"
                 href="#"
                 @click.prevent="tab = 'register'"
-                >Register</a
               >
+                Register
+              </a>
             </li>
           </ul>
 
@@ -127,6 +142,7 @@ export default {
             v-show="tab === 'register'"
             :validation-schema="validationSchema"
             @submit="register"
+            :initial-values="userData"
           >
             <!-- Name -->
             <div class="mb-3">
@@ -164,12 +180,20 @@ export default {
             <div class="mb-3">
               <label class="inline-block mb-2">Password</label>
               <vee-field
-                type="password"
                 name="password"
-                class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
-                placeholder="Password"
-              />
-              <ErrorMessage name="password" class="text-red-600" />
+                :bails="false"
+                v-slot="{ field, errors }"
+              >
+                <input
+                  type="password"
+                  class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
+                  placeholder="Password"
+                  v-bind="field"
+                />
+                <div class="text-red-600" v-for="error in errors" :key="error">
+                  {{ error }}
+                </div>
+              </vee-field>
             </div>
             <!-- Confirm Password -->
             <div class="mb-3">
@@ -193,7 +217,9 @@ export default {
                 <option value="USA">USA</option>
                 <option value="Mexico">Mexico</option>
                 <option value="Germany">Germany</option>
-                <option value="Banned">Banned Country For Testing Validation</option>
+                <option value="Banned">
+                  Banned Country For Testing Validation
+                </option>
               </vee-field>
               <ErrorMessage name="country" class="text-red-600" />
             </div>
@@ -220,5 +246,3 @@ export default {
     </div>
   </div>
 </template>
-
-<style scoped></style>
