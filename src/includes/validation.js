@@ -23,6 +23,7 @@ export default {
     app.component('VeeField', VeeField)
     app.component('ErrorMessage', ErrorMessage)
 
+    // Define rules
     defineRule('required', required)
     defineRule('tos', required)
     defineRule('min', min)
@@ -36,6 +37,7 @@ export default {
     defineRule('country_excluded', excluded)
 
     configure({
+      // Customise error messages
       generateMessage: (ctx) => {
         const messages = {
           required: `The field ${ctx.field} is required.`,
@@ -56,11 +58,13 @@ export default {
           : `The field ${ctx.field} is invalid.`
 
         return message
-      }
-      // validateOnBlur: true,
-      // validateOnChange: true,
-      // validateOnInput: false,
-      // validateOnModelUpdate: true
+      },
+
+      // Validation Triggers
+      validateOnBlur: true, // default: true
+      validateOnChange: true, // default: true
+      validateOnInput: false, // default: false
+      validateOnModelUpdate: true // default: true
     })
   }
 }
